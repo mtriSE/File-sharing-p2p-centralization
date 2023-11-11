@@ -81,8 +81,8 @@ Class used:
      - `__discover(self, client, hostname)`: Responds to a discover command for a specific client.
      - `__ping(self, client, hostname)`: Responds to a ping command for a specific client.
      - `do_start(self, args)`: Start server
-     - `do_ping(self, args)`: ping `<hostname>`: live check the host named `<hostname>`
-     - `do_discover(self,args)`: discover `<hostname>`: discover the list of local files of the host named `<hostname>`
+     - `do_ping(self, args)`: ping *hostname*: live check the host named *hostname*
+     - `do_discover(self,args)`: discover *hostname*: discover the list of local files of the host named *hostname*
      - `do_EOF(self,args)`: Provide user keystroke: `Ctrl + Z` to exit
     
 

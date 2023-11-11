@@ -3,6 +3,7 @@ import socket
 import threading
 import sys
 import cmd
+from app_utils import *
 
 LOCK = threading.Lock()     
 
@@ -19,7 +20,7 @@ class Server(cmd.Cmd):
         self.__server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.__clients = dict()
         # Each element format: {"username" : tuple(socket, list of files<[]>) }
-        
+        self.__file_repository = FileRepository()
     
     def __handle_client(self, connection, client_address):
         """
@@ -63,6 +64,7 @@ class Server(cmd.Cmd):
                     connection.sendall("400 Bad Command".encode())
                     
             # End connection => remove user's record
+            connection.close()
             print(username,"has been disconnected")
             return True
 
@@ -107,10 +109,10 @@ class Server(cmd.Cmd):
         pass
     
     def do_start(self, args):
+        # Starts the server's loop for accepting client connections.
         """
         start: Start server
         """
-        # Starts the server's loop for accepting client connections.
         try: 
             threading.Thread(target=self.__start__,daemon=True).start()
         except Exception as e: 

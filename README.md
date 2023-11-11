@@ -77,7 +77,7 @@ Class used:
    - **Methods:**
      - `__init__(self, server_address)`: Initializes the server with the server address and sets up the server socket.
      - `__start(self)`: Starts the server's main loop for accepting client connections.
-     - `__handle_client(self, client_socket, client_address)`: A thread that handles communication with an individual client.
+     - `__handle_client(self, connection, client_address)`: A thread that handles communication with an individual client.
      - `__discover(self, client, hostname)`: Responds to a discover command for a specific client.
      - `__ping(self, client, hostname)`: Responds to a ping command for a specific client.
      - `do_start(self, args)`: Start server

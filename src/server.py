@@ -17,8 +17,8 @@ class Server(cmd.Cmd):
         self.__PORT = port
         
         self.__server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.__clients = []
-        # Each element format: (socket, username, list of files<[]>)
+        self.__clients = dict()
+        # Each element format: {"username" : tuple(socket, list of files<[]>) }
         
     
     def __handle_client(self, connection, client_address):
@@ -26,22 +26,23 @@ class Server(cmd.Cmd):
         A thread that handles communication with an individual client.
         """
         try:
-            # Blocking call: wait for user input thei username
+            # Blocking call: wait for user input their username
             username = connection.recv(1024).decode()
             
             # Find user with username has been received above
             # user: list
-            user = filter(lambda client: client[1] == username,self.__clients)
+            user = self.__clients.get(username)
 
-            if (len(user) == 0):
-                # Accept user, because username isnt existed in __clients
-                self.__clients.insert(1,(connection,username,client_address))
-                
+            if (user is None):
+                # Accept user, because username isnt existed in __clients => update list of clients
+                self.__clients.update({username:(connection,[])})
+                connection.sendall("200 OK".encode())   
             else:
-                connection.close()
-                return
+                # username is duplicate => refused
                 
-            
+                connection.close()
+                return False
+                
             while True: 
                 msg = connection.recv(1024).decode()
                 if not msg:
@@ -62,10 +63,12 @@ class Server(cmd.Cmd):
                     connection.sendall("400 Bad Command".encode())
                     
             # End connection => remove user's record
-
             print(username,"has been disconnected")
+            return True
+
         except Exception as e:
             print(e.strerror)
+            self.__close()
     
     
     def __start(self):
@@ -85,6 +88,7 @@ class Server(cmd.Cmd):
                                                     
             except Exception as e: 
                 print(e.strerror)
+
 
     
     def __discover(self, client, hostname):

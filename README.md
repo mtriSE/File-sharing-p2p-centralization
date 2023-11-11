@@ -76,11 +76,15 @@ Class used:
 
    - **Methods:**
      - `__init__(self, server_address)`: Initializes the server with the server address and sets up the server socket.
-     - `start(self)`: Starts the server's main loop for accepting client connections.
-     - `handle_client(self, client_socket, client_address)`: Handles communication with an individual client.
-     - `discover(self, client, hostname)`: Responds to a discover command for a specific client.
-     - `ping(self, client, hostname)`: Responds to a ping command for a specific client.
-     - `broadcast(self, message, exclude_client=None)`: Sends a message to all connected clients except the specified client.
+     - `__start(self)`: Starts the server's main loop for accepting client connections.
+     - `__handle_client(self, client_socket, client_address)`: A thread that handles communication with an individual client.
+     - `__discover(self, client, hostname)`: Responds to a discover command for a specific client.
+     - `__ping(self, client, hostname)`: Responds to a ping command for a specific client.
+     - `do_start(self, args)`: Start server
+     - `do_ping(self, args)`: ping `<hostname>`: live check the host named `<hostname>`
+     - `do_discover(self,args)`: discover `<hostname>`: discover the list of local files of the host named `<hostname>`
+     - `do_EOF(self,args)`: Provide user keystroke: `Ctrl + Z` to exit
+    
 
 3. **FileSharingProtocol Class:**
 

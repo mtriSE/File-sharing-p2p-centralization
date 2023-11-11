@@ -68,8 +68,10 @@ Class used:
 2. **Server Class:**
 
    - **Attributes:**
-     - `server_socket`: The server's socket for accepting client connections.
-     - `clients`: A list to keep track of connected clients.
+     - `__HOSTNAME`: server's hostname or ip
+     - `__PORT`: server's port for waiting connection from clients
+     - `__server_socket`: The server's socket for accepting client connections.
+     - `__clients`: A list to keep track of connected clients.
      - `file_repository`: An instance of the `FileRepository` class to manage file information.
 
    - **Methods:**

@@ -19,7 +19,7 @@ class Server(cmd.Cmd):
         
         self.__server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.__clients = dict()
-        # Each element format: {"username" : tuple(socket, list of files<[]>) }
+        # Each element format: {"username" : tuple(socket, FileRepository) }
         self.__file_repository = FileRepository()
     
     def __handle_client(self, connection, client_address):

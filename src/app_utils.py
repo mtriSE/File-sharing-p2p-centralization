@@ -3,43 +3,46 @@ Module provide helper function
 """
 
 class FileSharingProtocol:
-    def serialize(self):
+    def serialize(self,data):
         """
         Converts data into a format suitable for transmission.
         """
-        pass
-    def deserialize(self):
+        
+    def deserialize(self,data):
         """
         Converts received data back into its original format.
         """
         pass
-    def publish_request(self):
+    def publish_request(self,lname,fname):
         """
         Generates the protocol message for a publish request.
         """
         pass
-    def fetch_request(self):
+    def fetch_request(self,fname):
         """
         Generates the protocol message for a fetch request.
         """
         pass
-    def discover_request(self):
+    def discover_request(self,hostname):
         """
         Generates the protocol message for a discover request.
         """
         pass
-    def ping_request(self):
+    def ping_request(self,hostname):
         """
         Generates the protocol message for a ping request.
         """
         pass
 
 class FileRepository:
+    client_files = dict()
+    # {"username": list of files}
+    
     def add_file(self, client, file):
         """
         Adds a file to the repository for a specific client.
         """
-        pass
+        
     def get_files(self, client):
         """
         Retrieves the list of files for a specific client.

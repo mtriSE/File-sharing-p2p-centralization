@@ -114,7 +114,7 @@ class Server(cmd.Cmd):
         start: Start server
         """
         try: 
-            threading.Thread(target=self.__start__,daemon=True).start()
+            threading.Thread(target=self.__start,daemon=True).start()
         except Exception as e: 
             print(f"[Exception]: {e.strerror}")
    

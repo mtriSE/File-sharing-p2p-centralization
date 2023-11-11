@@ -103,7 +103,7 @@
 ### 4. **FileRepository Class:**
 
    - **Attributes:**
-     - `client_files`: A dictionary to map clients to their respective files.
+     - `__client_files`: A dictionary to map clients to their respective files.
 
    - **Methods:**
      - `add_file(self, client, file)`: Adds a file to the repository for a specific client.

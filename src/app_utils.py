@@ -35,7 +35,7 @@ class FileSharingProtocol:
         pass
 
 class FileRepository:
-    client_files = dict()
+    __client_files = dict()
     # {"username": list of files}
     
     def add_file(self, client, file):
@@ -43,11 +43,14 @@ class FileRepository:
         Adds a file to the repository for a specific client.
         """
         
+        self.__client_files[client].append(file)
+        return True
+        
     def get_files(self, client):
         """
         Retrieves the list of files for a specific client.
         """
-        pass
+        
     def get_all_files(self):
         """
         Retrieves the list of all files across all clients.

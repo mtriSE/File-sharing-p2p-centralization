@@ -18,7 +18,7 @@ class Client:
         try:
             self.client_socket.connect(self.server_address)
             print(f"Connected to the server at {self.server_address}")
-            self.connected = False
+            self.connected = True
         except Exception as e:
             print(f"Error connecting to the server: {e}")
             self.client_socket.close()
